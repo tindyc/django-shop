@@ -7,7 +7,7 @@ SECRET_KEY = '3xk*)i0x#k$btl=(6q)te!19=mp6d)lm1+zl#ts4ewxi3-!vm_'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1']
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'basket',
     'account',
     'payment',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -104,3 +105,12 @@ LOGIN_URL = '/account/login/'
 
 # Email setting
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Basket session ID
+BASKET_SESSION_ID = 'basket'
+
+# Stripe Payment
+
+STRIPE_ENDPOINT_SECRET = 'whsec_2cb7bc074a7617198bbe1f8811ce3625857ab58befaac2abf89216bab2641702'
+# stripe listen --forward-to localhost:8000/payment/webhook/
+

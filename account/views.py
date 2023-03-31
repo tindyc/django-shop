@@ -7,6 +7,8 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
+from orders.views import user_orders
+
 from .forms import RegistrationForm, UserEditForm
 from .models import UserBase
 from .tokens import account_activation_token
@@ -14,8 +16,10 @@ from .tokens import account_activation_token
 
 @login_required
 def dashboard(request):
+    orders = user_orders(request)
     return render(request,
-                  'account/user/dashboard.html',)
+                  'account/user/dashboard.html',
+                  {'section': 'profile', 'orders': orders})
 
 
 @login_required
@@ -43,6 +47,9 @@ def delete_user(request):
 
 def account_register(request):
 
+    if request.user.is_authenticated:
+        return redirect('account:dashboard')
+
     if request.method == 'POST':
         registerForm = RegistrationForm(request.POST)
         if registerForm.is_valid():
@@ -51,7 +58,6 @@ def account_register(request):
             user.set_password(registerForm.cleaned_data['password'])
             user.is_active = False
             user.save()
-            #Set up Email
             current_site = get_current_site(request)
             subject = 'Activate your Account'
             message = render_to_string('account/registration/account_activation_email.html', {
