@@ -1,4 +1,3 @@
-"""
 {
     "editor.formatOnSave": true,
     "python.pythonPath": "venv\\Scripts\\python.exe",
@@ -22,4 +21,4 @@
       "**/requirements{/**,*}.{txt,in}": "pip-requirements"
     },
   }
-  """
+  
