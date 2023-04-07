@@ -108,3 +108,6 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Basket session ID
 BASKET_SESSION_ID = "basket"
+
+# Paypal popup error fix
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
